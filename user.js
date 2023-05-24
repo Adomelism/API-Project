@@ -5,7 +5,7 @@ async function init() {
     const urlParams = new URLSearchParams(queryParams);
     const id = urlParams.get('user_id');
 
-    const res = await fetch ('https://jsonplaceholder.typicode.com/users/1?_embed=posts&_embed=albums')
+    const res = await fetch (`https://jsonplaceholder.typicode.com/users/${id}?_embed=posts&_embed=albums`)
     const userInfo = await res.json()
 
     const userDataElement = userData(userInfo);
@@ -18,15 +18,14 @@ async function init() {
 init();
 
 
-function userData(userInfo) {
-    // const res = await fetch ('https://jsonplaceholder.typicode.com/users/${id}?_embed=posts&_embed=albums')
-    
+function userData(userInfo) {    
     const userDataList = document.createElement('div')
     userDataList.classList.add('user-data-list')
 
     const name = userInfo.name
     const nick = userInfo.username
     const email = userInfo.email
+    // console.log(userInfo)
     const address = `${userInfo.address.street}, ${userInfo.address.suite}, ${userInfo.address.city}, ${userInfo.address.zipcode}`
     const phone = userInfo.phone
     const website = userInfo.website
@@ -83,23 +82,21 @@ function userPosts(userInfo) {
     userInfo.posts.forEach(post => {
         const postLiElement = document.createElement('li')
         postsUlElement.append(postLiElement)
+        console.log(post.id)
 
         const postLink = document.createElement('a')
-        postLink.href = `./post.html`
+        postLink.href = `./post.html?post_id=` + post.id
         postLink.textContent = post.title
         postLiElement.append(postLink);
 
     });
-
     return postsList
-
 }
 
 function userAlbums(userInfo) {
 
     const albumsList = document.createElement('div')
     albumsList.classList.add('albums-list')
-    // usersListSection.append(albumsList)
 
     const albumTitle = document.createElement('h2')
     const albumUlElement = document.createElement('ul')
@@ -111,10 +108,9 @@ function userAlbums(userInfo) {
         albumUlElement.append(albumLiElement)
 
         const albumLink = document.createElement('a')
-        albumLink.href = `./album.html`
+        albumLink.href = `./album.html?album_id=` + album.id
         albumLink.textContent = album.title
         albumLiElement.append(albumLink)
     });
-
     return albumsList
 }
