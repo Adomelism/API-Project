@@ -1,9 +1,27 @@
-const usersListSection = document.querySelector('#content')
 
+async function init() {
+    const usersListSection = document.querySelector('#content')
+    const queryParams = location.search;
+    const urlParams = new URLSearchParams(queryParams);
+    const id = urlParams.get('user_id');
 
-async function userData() {
     const res = await fetch ('https://jsonplaceholder.typicode.com/users/1?_embed=posts&_embed=albums')
     const userInfo = await res.json()
+
+    userData(usersListSection, userInfo);
+
+    usersListSection.append(userPosts(userInfo));
+
+    // userAlbums(usersListSection, userInfo);
+
+
+}
+init();
+
+
+function userData(usersListSection, userInfo) {
+    // const res = await fetch ('https://jsonplaceholder.typicode.com/users/${id}?_embed=posts&_embed=albums')
+    
 
     const name = userInfo.name
     const nick = userInfo.username
@@ -49,31 +67,34 @@ async function userData() {
     
     usersListSection.prepend(userName, nickName, userEmail, userAddress, userPhone, userWebsite, userCompany);
 }
-userData();
 
-async function userPosts() {
-    const res = await fetch ('https://jsonplaceholder.typicode.com/users/1?_embed=posts&_embed=albums')
-    const userInfo = await res.json()
+function userPosts(userInfo) {
+    const postsList = document.createElement('div')
 
+    postsList.classList.add('posts-lists')
     const postitle = document.createElement('h2')
+    const postsUlElement = document.createElement('ul')
+    postsList.append(postitle, postsUlElement)
     postitle.textContent = `Posts:`
+    console.log(userInfo)
 
     userInfo.posts.forEach(post => {
         console.log(post.title)
-        const postList = document.createElement('p')
+        const postLiElement = document.createElement('li')
+        postsUlElement.append(postLiElement)
         const postLink = document.createElement('a')
         postLink.href = `./post.html`
         postLink.textContent = post.title
 
-        usersListSection.append(postitle, postList, postLink)
+        postLiElement.append(postLink);
+
     });
 
-}
-userPosts();
+    return postsList
 
-async function userAlbums() {
-    const res = await fetch ('https://jsonplaceholder.typicode.com/users/1?_embed=posts&_embed=albums')
-    const userInfo = await res.json()
+}
+
+function userAlbums(usersListSection, userInfo) {
 
     const albumTitle = document.createElement('h2')
     albumTitle.textContent = `Albums:`
@@ -90,4 +111,3 @@ async function userAlbums() {
 
     
 }
-userAlbums();

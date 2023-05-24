@@ -9,6 +9,8 @@ async function getUsers() {
     const usersData = await usersList.json();
     usersData.forEach(userData => {
         const user = userData.name
+        const userId = userData.id
+      
 
         const userLiElement = document.createElement('li');
         const userLink = document.createElement('a');
@@ -17,7 +19,7 @@ async function getUsers() {
         
         // userLiElement.textContent = user;
         userLink.textContent = `${user} (${userData.posts.length})`;
-        userLink.href = './user.html';
+        userLink.href = './user.html?user_id=' + userId;
         console.log(userLink)
         
 
