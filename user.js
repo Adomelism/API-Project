@@ -8,20 +8,21 @@ async function init() {
     const res = await fetch ('https://jsonplaceholder.typicode.com/users/1?_embed=posts&_embed=albums')
     const userInfo = await res.json()
 
-    userData(usersListSection, userInfo);
+    const userDataElement = userData(userInfo);
+    const userPostsElement = userPosts(userInfo);
+    const userAlbumsElement = userAlbums(userInfo);
 
-    usersListSection.append(userPosts(userInfo));
-
-    // userAlbums(usersListSection, userInfo);
-
+    usersListSection.append(userDataElement, userPostsElement, userAlbumsElement);
 
 }
 init();
 
 
-function userData(usersListSection, userInfo) {
+function userData(userInfo) {
     // const res = await fetch ('https://jsonplaceholder.typicode.com/users/${id}?_embed=posts&_embed=albums')
     
+    const userDataList = document.createElement('div')
+    userDataList.classList.add('user-data-list')
 
     const name = userInfo.name
     const nick = userInfo.username
@@ -64,28 +65,28 @@ function userData(usersListSection, userInfo) {
     const userCompany = document.createElement('h4')
     userCompany.textContent = `Company: ${company}`;
     
-    
-    usersListSection.prepend(userName, nickName, userEmail, userAddress, userPhone, userWebsite, userCompany);
+    userDataList.append(userName, nickName, userEmail, userAddress, userPhone, userWebsite, userCompany)
+
+
+    return userDataList
 }
 
 function userPosts(userInfo) {
     const postsList = document.createElement('div')
-
     postsList.classList.add('posts-lists')
+
     const postitle = document.createElement('h2')
     const postsUlElement = document.createElement('ul')
     postsList.append(postitle, postsUlElement)
     postitle.textContent = `Posts:`
-    console.log(userInfo)
 
     userInfo.posts.forEach(post => {
-        console.log(post.title)
         const postLiElement = document.createElement('li')
         postsUlElement.append(postLiElement)
+
         const postLink = document.createElement('a')
         postLink.href = `./post.html`
         postLink.textContent = post.title
-
         postLiElement.append(postLink);
 
     });
@@ -94,20 +95,26 @@ function userPosts(userInfo) {
 
 }
 
-function userAlbums(usersListSection, userInfo) {
+function userAlbums(userInfo) {
+
+    const albumsList = document.createElement('div')
+    albumsList.classList.add('albums-list')
+    // usersListSection.append(albumsList)
 
     const albumTitle = document.createElement('h2')
+    const albumUlElement = document.createElement('ul')
+    albumsList.append(albumTitle, albumUlElement)
     albumTitle.textContent = `Albums:`
 
     userInfo.albums.forEach(album => {
-        const albumList = document.createElement('p')
+        const albumLiElement = document.createElement('li')
+        albumUlElement.append(albumLiElement)
+
         const albumLink = document.createElement('a')
         albumLink.href = `./album.html`
         albumLink.textContent = album.title
-
-        usersListSection.append(albumTitle, albumList, albumLink)
-
+        albumLiElement.append(albumLink)
     });
 
-    
+    return albumsList
 }
