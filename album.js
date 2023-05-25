@@ -13,14 +13,13 @@ async function init() {
 
     console.log(id)
 
-    // if (!id) {
-    //     contentElement.innerHTML = `<h1>Something went wrong...</h1>
-    //                                 <p>Search for more albums <a href="./albums.html">here</a>.</p>`
-    //     return;
-    //   }
+    if (!id) {
+        contentElement.innerHTML = `<h1>Something went wrong...</h1>
+                                    <p>Search for more albums <a href="./albums.html">here</a>.</p>`
+        return;
+      }
 
-    // const res = await fetch(`https://jsonplaceholder.typicode.com/albums/${id}?_expand=user&_embed=photos`)
-    const res = await fetch(`https://jsonplaceholder.typicode.com/albums/1?_expand=user&_embed=photos`)
+    const res = await fetch(`https://jsonplaceholder.typicode.com/albums/${id}?_expand=user&_embed=photos`)
     const albumData = await res.json()
 
     const albumWrapperElement = createAlbum(albumData)

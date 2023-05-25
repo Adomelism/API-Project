@@ -20,7 +20,7 @@ async function getAlbums() {
         albumItem.classList.add('album-item');
 
         const albumLink = document.createElement('a');
-        albumLink.href = './album.html';
+        albumLink.href = './album.html?album_id=' + album.id;
 
         albumItem.append(albumLink);
 
