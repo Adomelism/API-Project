@@ -40,7 +40,7 @@ function createAlbum(albumData) {
     albumTitle.textContent = albumData.title
     
     const albumAuthor = document.createElement('a')
-    albumAuthor.href = `./users.html/user_id=` + albumData.user.id
+    albumAuthor.href = `./users.html?user_id=` + albumData.user.id
     albumAuthor.textContent = albumData.user.name
 
     albumContent.append(albumTitle, albumAuthor)

@@ -1,19 +1,27 @@
-// 9. Sukurti paieškos funkcionalumą navigacijos elemente:
-// 9.1. Navigacijos elemente sukurti formą, kuri turi text tipo input elementą (nepamiršti pridėti name atributą).
-// 9.2. Formos submit metu, naudojant action atributą, nukreipti į naują puslapį (search.html).
-// 9.3. Šiame puslapyje atvaizduoti paieškos rezultatą.
-// 9.3.1. Jeigu nėra tinkamų rezultatų, tai parašyti jog rezultatų pagal užklausą nerasta.
-
-
-function navigation() {
+export default function navigation() {
     const headerElement = document.createElement('header');
+
+    const searchForm = document.createElement('form')
+    searchForm.action = './search.html'
+
+    const searchInput = document.createElement('input')
+    searchInput.type = 'text'
+    searchInput.name = 'search'
+    searchInput.id = 'search'
+
+    const searchButton = document.createElement('button')
+    searchButton.type = 'submit'
+    searchButton.textContent = 'Search'
+
+    searchForm.append(searchInput, searchButton)
+
     const navigationElement = document.createElement('nav');
     navigationElement.classList.add('main-navigation');
     headerElement.append(navigationElement);
 
     const menuList = document.createElement('ul');
     menuList.classList.add('menu', 'main-menu');
-    navigationElement.append(menuList);
+    navigationElement.append(menuList, searchForm);
 
     const menuItems = [
     {
@@ -52,8 +60,7 @@ function navigation() {
 
     })
 
-    document.body.prepend(headerElement);
-
+return headerElement
 }
 
 navigation();

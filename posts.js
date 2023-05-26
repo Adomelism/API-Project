@@ -14,8 +14,8 @@ async function getPosts() {
         const postLink = document.createElement('a');
         const authorLink = document.createElement('a');
 
-        postLink.href = `./post.html`;
-        authorLink.href = `./user.html`;
+        postLink.href = `./post.html?post_id=` + post.id;
+        authorLink.href = `./user.html?user_id=` + post.userId;
 
         
         postLiElement.append(postLink, ` (${post.comments.length})`, ` - `, authorLink);
