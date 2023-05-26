@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>API-Project</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="photoswipe/dist/photoswipe.css">
 </head>
 <body>
   
@@ -13,6 +14,16 @@
 <a href="./users.html"></a>
 
   <script type="module" src="albums.js"></script>
+  
+  <script type="module">
+    import PhotoSwipeLightbox from 'photoswipe/dist/photoswipe-lightbox.esm.js';
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: '#my-gallery',
+      children: 'a',
+      pswpModule: () => import('photoswipe/dist/photoswipe.esm.js')
+    });
+    lightbox.init();
+    </script>
 
 </body>
 </html>

@@ -1,4 +1,5 @@
 import navigation from "./navigation.js";
+// import PhotoSwipeLightbox from "./photoswipe/photoswipe-lightbox.esm.js";
 
 async function init() {
     const contentElement = document.querySelector('#content')

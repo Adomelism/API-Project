@@ -14,10 +14,17 @@ async function init() {
     const searchAlbums = await fetchData(`https://jsonplaceholder.typicode.com/albums?q=${searchPhrase}`)
     const searchUsers = await fetchData(`https://jsonplaceholder.typicode.com/users?q=${searchPhrase}`)
     console.log(searchPosts)
-    
+
+    if (!searchPhrase) {
+      const noInput = document.createElement('h1')
+      noInput.textContent = `Empty search field submitted, please enter a parameter to search.`
+      searchContentElement.append(noInput);
+      return
+    }
+
    if (searchPosts.length === 0 && searchAlbums.length === 0 && searchUsers.length === 0) {
     const noResultsFound = document.createElement('h1')
-    noResultsFound.textContent = `No results found`
+    noResultsFound.textContent = `No results found.`
     searchContentElement.append(noResultsFound);
     return;
    }
