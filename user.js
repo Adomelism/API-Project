@@ -1,6 +1,9 @@
+import navigation from "./navigation.js";
 
 async function init() {
     const usersListSection = document.querySelector('#content')
+    const headerElement = navigation()
+    usersListSection.append(headerElement) 
     const queryParams = location.search;
     const urlParams = new URLSearchParams(queryParams);
     const id = urlParams.get('user_id');
