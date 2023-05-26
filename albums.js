@@ -1,12 +1,24 @@
-const usersListSection = document.querySelector('#content')
+import navigation from "./navigation.js";
 
-async function getAlbums() {
-    const albumsList = document.createElement('div');
-    albumsList.classList.add('albums-list');
-    usersListSection.prepend(albumsList);
+async function init() {
 
     const albumsListData = await fetch('https://jsonplaceholder.typicode.com/albums?_expand=user&_embed=photos')
     const albumsData = await albumsListData.json()
+
+    const usersListSection = document.querySelector('#content')
+    const headerElement = navigation();
+    usersListSection.append(headerElement) 
+    usersListSection.append(getAlbums(albumsData)) 
+
+}
+init();
+   
+function getAlbums(albumsData) {
+
+    const albumsList = document.createElement('div');
+    albumsList.classList.add('albums-list');
+
+    
     albumsData.forEach(album => {
         const title = album.title;
         const author = album.user.name;
@@ -38,6 +50,6 @@ async function getAlbums() {
         
         albumsList.append(albumItem);
     })
+    return albumsList;
 }
 
-getAlbums();

@@ -1,11 +1,9 @@
-//   Panaudoti library (biblioteką), kuri skirta gražiam galerijos atvaizdavimui, pvz.:
-//     8.3.1. https://photoswipe.com/
-//     8.3.2. https://nanogallery2.nanostudio.org/
-//     8.3.3. https://sachinchoolur.github.io/lightgallery.js/
-//     8.3.4. Arba bet kurią kitą.
+import navigation from "./navigation.js";
 
 async function init() {
     const contentElement = document.querySelector('#content')
+    const headerElement = navigation();
+    contentElement.append(headerElement)
 
     const queryParams = location.search;
     const urlParams = new URLSearchParams(queryParams);
