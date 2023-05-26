@@ -26,7 +26,7 @@ export default function navigation() {
     const menuItems = [
     {
         title: 'Home',
-        path: 'home.html',
+        path: 'index.html',
     },
     {
         title: 'Users',

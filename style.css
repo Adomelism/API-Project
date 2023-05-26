@@ -1,3 +1,11 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.link {
+  text-decoration: none;
+}
+
 .menu {
     list-style-type: none;
     padding-left: 0;
@@ -16,3 +24,30 @@
     color: blue;
     text-decoration: underline;
   }
+
+  .main-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .albums-list {
+    /* display: flex;
+    flex-wrap: wrap; */
+    justify-content: space-evenly;
+
+  }
+
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  text-align: center;
+}
+
+  .home-page-logo {
+    width: 500px;
+  }
+
