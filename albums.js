@@ -25,7 +25,7 @@ function getAlbums(albumsData) {
         const photosCount = album.photos.length;
         const randomIndex = Math.floor(Math.random() * photosCount);
         const randomImage = album.photos[randomIndex];
-        const randomImageUrl = randomImage.url;
+        const randomImageUrl = randomImage.thumbnailUrl;
         const randomImageTitle = randomImage.title;
 
         const albumItem = document.createElement('div');
